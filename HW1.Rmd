@@ -1,0 +1,84 @@
+---
+title: "HW1_XiangxiongFeng"
+author: "Xiangxiong Feng"
+date: "2023-09-23"
+output: 
+  html_document:
+    toc: true
+    code_folding: hide
+   
+        
+          
+---
+
+# Problem 1
+
+```{r}
+library(moderndive)
+library(tidyverse)
+
+data("early_january_weather")
+head(early_january_weather)
+#import 'early_january_weather'
+
+nrow(early_january_weather)
+ncol(early_january_weather)
+#size of the dataset
+
+mean(early_january_weather$temp)
+mean(early_january_weather$humid)
+mean(early_january_weather$dewp)
+#the mean of important variables
+
+#description: the data includes 15 variables. Some important variables are time_hour, temp, humid and dewp. The mean temperature in this data is 39.58212.
+
+ggplot(data = early_january_weather,aes(x = time_hour, y = temp, color = humid)) + geom_point()
+ggsave("tempvstime_hour.pdf", height = 4, width = 6)
+#scatterplot of temp (y) vs time_hour (x)
+
+
+```
+
+
+# Problem 2
+
+```{r}
+dat = rnorm(10)
+logical_vector = dat > 0
+character_vector = c(1:10)
+factor_vector = factor(rep(c("Level1", "Level2", "Level3"), length.out = 10))
+
+df = data.frame( Number = dat,
+  Logical = logical_vector,
+  Character = character_vector,
+  Factor = factor_vector
+)
+df
+# created a data frame
+
+Number = pull(df, Number)
+mean(Number)
+#mean of Number
+
+
+
+
+
+```
+Only the random_sample itself can take the mean. Because the other three are not numeric . 
+
+```{r}
+Logical = pull(df, Logical)
+Character = pull(df, Character)
+Factor = pull(df, Factor)
+as.numeric(Logical)
+as.numeric(Character)
+as.numeric(Factor)
+
+```
+Now there are numeric but still follow certain patterns such as 1 = True, 0 = False. This dose help explain what happens when you try to take the mean.
+
+
+
+
+
